@@ -1,0 +1,26 @@
+{
+  "name": "tcomb-form-injector",
+  "version": "1.0.0",
+  "description": "Inject any component as tcomb-form field",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saidmoya12/tcomb-form-injector.git"
+  },
+  "keywords": [
+    "tcomb-form",
+    "inject",
+    "component",
+    "form",
+    "field"
+  ],
+  "author": "Said Moya Wilches",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saidmoya12/tcomb-form-injector/issues"
+  },
+  "homepage": "https://github.com/saidmoya12/tcomb-form-injector#readme"
+}
