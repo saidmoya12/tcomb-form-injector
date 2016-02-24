@@ -4,7 +4,7 @@
   "description": "Inject any component as tcomb-form field",
   "main": "lib/index.js",
   "scripts": {
-	"build": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
+	"build": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "babel": {
