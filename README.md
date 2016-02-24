@@ -1,9 +1,19 @@
+#Injector factory
+
+###Instalation
+npm install tcomb-form-injector --save
+
 ###Example complex component
+
+Sample documentation:
+[tcomb-form](https://github.com/gcanti/tcomb-form)
+[react-datetime](https://github.com/gcanti/tcomb-form)
+
 ```js
-import t from 'tcomb-form'        //@see: https://github.com/gcanti/tcomb-form
+import t from 'tcomb-form'        
 
 //sample with datetime picker
-import DateTime     from 'react-datetime'; //@see: https://github.com/YouCanBookMe/react-datetime
+import DateTime     from 'react-datetime';
 
 import TFormFactoryInjector        from from 'tcomb-form-injector'
 
