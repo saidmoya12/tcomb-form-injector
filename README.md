@@ -5,8 +5,8 @@ npm install tcomb-form-injector --save
 
 ###Example complex component
 
-Sample documentation:
-[tcomb-form](https://github.com/gcanti/tcomb-form)
+Documentation for example:
+[tcomb-form](https://github.com/gcanti/tcomb-form),
 [react-datetime](https://github.com/gcanti/tcomb-form)
 
 ```js
