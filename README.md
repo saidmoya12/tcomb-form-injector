@@ -11,7 +11,7 @@ Validation iextended from tcomb-form and tcomb-form-validation
 ###Instalation
 npm install tcomb-form-injector --save
 
-###Example repeated Injection
+###Example for repeated field
 ```js
 import t from 'tcomb-form'        
 import {Factories}        from from 'tcomb-form-injector'
@@ -44,7 +44,7 @@ import TFormFactoryInjector        from from 'tcomb-form-injector'
 var formOptions = {
     fields:{
         date: {
-            factory: TFormFactoryInjector.InjectorFactory,
+            factory: TFormFactoryInjector,
             inject: {
                 attrs:        {placeholder: 'Reservación'}, //tcomb attrs
                 component:    DateTime,

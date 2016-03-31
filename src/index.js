@@ -12,5 +12,6 @@ export default Injector;
 
 exports.Types		= Types;
 exports.Factories	= {
-	Repeated:	Repeated
+	Repeated:			Repeated,
+	InjectorFactory:	Injector
 };
