@@ -92,7 +92,7 @@ class Repeated extends React.Component {
 			<div key={1} className={classes}>{inputRepeated}</div>]
 		);
 	}
-
+	
 	render(){
 		let inputs = this.renderInputs();
 
