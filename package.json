@@ -1,6 +1,6 @@
 {
   "name": "tcomb-form-injector",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Inject any component as tcomb-form field",
   "main": "lib/index.js",
   "scripts": {
