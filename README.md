@@ -2,8 +2,10 @@
 
 ###About
 
-Inject any component as tcomb-form-field, (autocomplete, datetime, custom, etc)
-Validation iextended from tcomb-form and tcomb-form-validation
+Inject any component as tcomb-form field, (autocomplete, datetime, custom, etc)
+Validation extended from tcomb-form and tcomb-form-validation
+
+Contributions are welcome...
 
 **New 0.1.1**
 Deprecated indirect import
@@ -19,7 +21,7 @@ var formOldOptions = {
 	}
 }
 ```
-Employ direct access
+Employ direct import instance
 ```js
 import injectorFactory from 'tcomb-form-injector'
 ...
@@ -33,8 +35,8 @@ var formnewOptions = {
 }
 ```
 
-
 **New 0.1.0**
+
 Repeated field factory
 
 ###Instalation
