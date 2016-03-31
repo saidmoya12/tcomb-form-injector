@@ -1,12 +1,41 @@
-#Injector factory
+#tcomb-form-injector
 
 ###About
 
 Inject any component as tcomb-form-field, (autocomplete, datetime, custom, etc)
 Validation iextended from tcomb-form and tcomb-form-validation
 
-**New 0.1.0 inject repeated field**
+**New 0.1.1**
+Deprecated indirect import
+```js
+import TFormFactoryInjector from 'tcomb-form-injector'
+...
+var formOldOptions = {
+	fields: {
+		date: {
+			factory: TFormFactoryInjector.injectorFactory,
+			...
+		}
+	}
+}
+```
+Employ direct access
+```js
+import injectorFactory from 'tcomb-form-injector'
+...
+var formnewOptions = {
+	fields: {
+		date: {
+			factory: injectorFactory,
+			...
+		}
+	}
+}
+```
 
+
+**New 0.1.0**
+Repeated field factory
 
 ###Instalation
 npm install tcomb-form-injector --save
@@ -19,7 +48,7 @@ import {Factories}        from from 'tcomb-form-injector'
 var formOptions = {
 	fields: {
 		password: {
-			factory:	Factories.repeated,
+			factory:		Factories.repeated,
 			type:			'password',
 			attrs: 			{placeholder: 'Type Password'},
 			repeatedAttrs:	{placeholder: 'Repeat password'}
@@ -37,14 +66,13 @@ Documentation for example:
 import t from 'tcomb-form'        
 
 //sample with datetime picker
-import DateTime     from 'react-datetime';
-
-import TFormFactoryInjector        from from 'tcomb-form-injector'
+import DateTime    			from 'react-datetime';
+import injectorFactory      from from 'tcomb-form-injector'
 
 var formOptions = {
     fields:{
         date: {
-            factory: TFormFactoryInjector,
+            factory: injectorFactory,
             inject: {
                 attrs:        {placeholder: 'Reservación'}, //tcomb attrs
                 component:    DateTime,
@@ -65,9 +93,9 @@ var formOptions = {
 ###Default settings for injector
 ```js
 inject: {
-    valueProp:        'value',
-    props:             {},            //component props
-    event:            'onChange',    //component event type
+    valueProp:       'value',
+    props:           {},            //component props
+    event:           'onChange',    //component event type
     callback:        function(locals, value){
         locals.onChange(value);
     }

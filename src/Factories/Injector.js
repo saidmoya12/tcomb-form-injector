@@ -1,3 +1,7 @@
+/**
+* Created By @saidmoya12
+*/
+'use strict';
 import React				from 'react';
 import classNames			from 'classnames';
 import _					from 'underscore';
@@ -145,3 +149,9 @@ Injector.propTypes = {
 		valueProp:	React.PropTypes.string
 	})
 }
+
+//FIXME: REMOVE OLD FOR OLD VERSION
+Injector.InjectorFactory = function(props){
+	console.warn('TFormFactoryInjector.InjectorFactory is deprecated, please use direct import instance, see documentation');
+	return React.createElement(Injector, props);
+};

@@ -1,3 +1,7 @@
+/**
+* Created By @saidmoya12
+*/
+'use strict';
 import React				from 'react';
 import classNames			from 'classnames';
 import _					from 'underscore';
