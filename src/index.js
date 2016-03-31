@@ -1,8 +1,7 @@
-'use strict';
-/!**
+/**
 * Created By @saidmoya12
 */
-
+'use strict';
 import React				from 'react';
 import classNames			from 'classnames';
 import _					from 'underscore';
@@ -154,5 +153,5 @@ InjectorFactory.propTypes = {
 	})
 }
 
-export Factories;
-export Types;
+exports.Factories	= Factories;
+exports.Types		= Types;
