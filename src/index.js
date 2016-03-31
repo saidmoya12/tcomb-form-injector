@@ -1,15 +1,17 @@
-/**
-*
-*/
 'use strict';
+/!**
+* Created By @saidmoya12
+*/
 
 import React				from 'react';
 import classNames			from 'classnames';
 import _					from 'underscore';
 import t					from 'tcomb-form'
 
-export default class InjectorFactory extends React.Component {
+import Types				from './Types';
+import Factories			from './Factories';
 
+export default class InjectorFactory extends React.Component {
 	constructor(props){
 		super(props);
 
@@ -151,3 +153,6 @@ InjectorFactory.propTypes = {
 		valueProp:	React.PropTypes.string
 	})
 }
+
+export Factories;
+export Types;
