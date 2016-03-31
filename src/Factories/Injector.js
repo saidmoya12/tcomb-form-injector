@@ -1,12 +1,9 @@
-'use strict';
-
 import React				from 'react';
 import classNames			from 'classnames';
 import _					from 'underscore';
 import t					from 'tcomb-form'
 
-export default class InjectorFactory extends React.Component {
-
+export default class Injector extends React.Component {
 	constructor(props){
 		super(props);
 
@@ -134,11 +131,11 @@ export default class InjectorFactory extends React.Component {
 	}
 }
 
-InjectorFactory.defaultProps = {
-
+Injector.defaultProps = {
+	value: null
 }
 
-InjectorFactory.propTypes = {
+Injector.propTypes = {
 	value: React.PropTypes.any,
 	inject: React.PropTypes.shape({
 		component:	React.PropTypes.object.isRequired,
