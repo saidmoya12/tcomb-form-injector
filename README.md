@@ -1,12 +1,36 @@
 #Injector factory
 
+###About
+
+Inject any component as tcomb-form-field, (autocomplete, datetime, custom, etc)
+Validation iextended from tcomb-form and tcomb-form-validation
+
+**New 0.1.0 inject repeated field**
+
+
 ###Instalation
 npm install tcomb-form-injector --save
 
+###Example repeated Injection
+```js
+import t from 'tcomb-form'        
+import {Factories}        from from 'tcomb-form-injector'
+
+var formOptions = {
+	fields: {
+		password: {
+			factory:	Factories.repeated,
+			type:			'password',
+			attrs: 			{placeholder: 'Type Password'},
+			repeatedAttrs:	{placeholder: 'Repeat password'}
+		}
+	}
+}
+```
 ###Example complex component
 
 Documentation for example:
-[tcomb-form](https://github.com/gcanti/tcomb-form),
+[tcomb-form](https://github.com/gcanti/tcomb-form)
 [react-datetime](https://github.com/gcanti/tcomb-form)
 
 ```js
@@ -38,7 +62,7 @@ var formOptions = {
 }
 ```
 
-###Default settings
+###Default settings for injector
 ```js
 inject: {
     valueProp:        'value',
