@@ -32,7 +32,9 @@ class Repeated extends React.Component {
 
 	validate(){
 		let result = t.validate(this.state.value, this.props.type, this.props.ctx.path);
-		let isValid = result.isValid() && (this.refs.input.value === this.refs.inputRepeated.value);
+		let isValid = (result.isValid() && (this.refs.input.value === this.refs.inputRepeated.value));
+
+		console.log(this.refs.input.value, this.refs.inputRepeated.value);
 
 		this.setState({
 			isValid: isValid
