@@ -9,35 +9,8 @@ Contributions are welcome...
 
 **New 0.1.1**
 Deprecated indirect import
-```js
-import TFormFactoryInjector from 'tcomb-form-injector'
-...
-var formOldOptions = {
-	fields: {
-		date: {
-			factory: TFormFactoryInjector.injectorFactory,
-			...
-		}
-	}
-}
-```
-Employ direct import instance
-```js
-import injectorFactory from 'tcomb-form-injector'
-...
-var formnewOptions = {
-	fields: {
-		date: {
-			factory: injectorFactory,
-			...
-		}
-	}
-}
-```
 
-**New 0.1.0**
-
-Repeated field factory
+[see UPGRADE.md](UPGRADE.md)
 
 ###Instalation
 npm install tcomb-form-injector --save
