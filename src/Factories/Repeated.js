@@ -39,13 +39,17 @@ export default class Repeated extends React.Component {
 		let result = t.validate(value, this.props.type, this.props.ctx.path);
 		let isValid = result.isValid();
 
-		if(result.isValid()){
+		if(isValid){
 			if(value !== valueRepeated){
 				result = t.validate(undefined, this.props.type, 'repeated')
 				isValid = false;
 			}
 		}
-		
+
+		this.setState({
+			isValid: isValid
+		})
+
 		return result;
 	}
 
