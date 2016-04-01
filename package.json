@@ -21,6 +21,7 @@
     "inject",
     "component",
     "form",
+	"repeated",
     "field"
   ],
   "author": "Said Moya Wilches",
