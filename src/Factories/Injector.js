@@ -7,127 +7,139 @@ import classNames			from 'classnames';
 import _					from 'underscore';
 import t					from 'tcomb-form'
 
-export default class Injector extends React.Component {
+let ctx;
+export default class Injector extends t.form.Component {
+	static transformer = {
+		format: value => {
+			if(t.Nil.is(value)) return false;
+
+			if(_.isObject(value)){
+				if(value.id !== undefined){
+					value = value.id;
+				}else if(value.key !== undefined){
+					value = value.key;
+				}
+			}
+			return value;
+		},
+		parse: value => value
+	};
+
+	static numberTransformer = {
+		format: value => {
+			if(t.Nil.is(value)) return '';
+
+			if(_.isObject(value)){
+				if(value.id !== undefined){
+					value = value.id;
+				}else if(value.key !== undefined){
+					value = value.key;
+				}
+			}
+			return value;
+		},
+		parse: value => {
+			return parseNumber(value)
+		}
+	};
+
 	constructor(props){
+		if(props.options.inject === undefined || props.options.inject.component === undefined){
+			throw new Error('inject params are required');
+		}
+		props.options.inject = _.extend({
+			props: {},
+			'event': 'onChange',
+			onChange: function(){}
+		}, props.options.inject);
 		super(props);
 
-		this.state = {
-			isValid:	true,
-			Element:	this.createElement(props.options, props.value),
-			value:		this.setValue(props.value, true),
-			elementValue: props.value
-		};
-	}
-
-	//update component
-	componentWillReceiveProps(nextProps){
-		this.setState({
-			Element: 		this.createElement(nextProps.options, nextProps.value),
-			elementValue:	nextProps.value,
-			value:			this.setValue(nextProps.value, true)
+		this.state = _.extend(this.state, {
+			elementValue:	props.value
 		});
 	}
 
-	onChange(value, path){
+	componentWillReceiveProps(props) {
+		if (props.type !== this.props.type) {
+	    	this.typeInfo = getTypeInfo(props.type)
+	    }
+	    const value = this.getTransformer().format(props.value)
+
 		this.setState({
-			value: value
-		}, function(){
-			this.props.onChange(value, this.props.ctx.path);
+			value:			value,
+			elementValue:	props.value
 		})
 	}
 
-	setValue(value, returnData){
-		let elementValue = value;
-
-		if(_.isObject(value)){
-			if(value.id !== undefined){
-				value = value.id;
-			}else if(value.key !== undefined){
-				value = value.key;
-			}
-		}
-
-		if(returnData == true) return value;
+	componentWillMount(props){
+		ctx = this;
 	}
 
-	validate(){
-		let result = t.validate(this.state.value, this.props.type, this.props.ctx.path);
-		this.setState({
-			isValid: result.isValid()
-		})
-		return result;
-	}
+	getInjectedElement(){
+		let {component, props, event, callback, valueProp} = this.props.options.inject;
 
-	getDefaultLabel(){
-
-	}
-
-	getLabel() {
-		var opts = this.props.options || {};
-	    var ctx = this.props.ctx;
-
-		// handling label
-	    var label = opts.label;
-	    if (!label && ctx.auto === 'labels') {
-	      // if labels are auto generated, get the default label
-	      label = this.getDefaultLabel();
-	    }
-
-	    if(label === undefined){
-	    	return null;
-	    }
-
-	    return (<label id={opts.id}>{label}</label>);
-	}
-
-	getPlaceHolder(){
-		var opts = this.props.options || {};
-	    var ctx = this.props.ctx;
-
-		var placeholder = null;
-	    // labels have higher priority
-	    if (ctx.auto !== 'none') {
-	    	placeholder = !t.Nil.is(opts.placeholder) ? opts.placeholder : ctx.label;
-	    }
-
-	    return placeholder;
-	}
-
-
-	createElement(options, value){
-		let {component, props, event, callback, valueProp} = options.inject;
-
-		props.placeholder = this.getPlaceHolder();
-		if(options.attrs !== undefined){
-			props = _.extend(options.attrs, props);
-		}
-
-		props.key = Math.floor((Math.random() * 100) + 1);
+		props.placeholder = this.getPlaceholder();
+		props = _.extend(this.props.options.attrs || {}, props);
 
 		valueProp = valueProp || 'value';
-		props[valueProp] = value;
+		props[valueProp] = this.state.elementValue;
 
-		event = event || 'onChange';
+		//props.key = Math.floor((Math.random() * 100) + 1);
+
 		if(callback !== undefined){
 			props[event] = callback.bind(null, this);
 		}else{
 			props[event] = function(evt){
-				this.onChange(evt.target.value);
+				ctx.onChange(evt.target.value);
 			}
 		}
 
 		return React.createElement(component, props);
 	}
 
-	render(){
-		let {Element} = this.state;
+	getTransformer(){
+		const options = this.props.options;
+		if (options.transformer) {
+			return options.transformer;
+		}
 
-		let label = this.getLabel();
+		let type = this.typeInfo.innerType.meta.name;
+
+		switch (type) {
+			case t.Number.meta.name:
+				return this.constructor.numberTransformer;
+			break;
+		}
+
+		return this.constructor.transformer;
+	}
+
+	onChange(value){
+		this.setState({
+			elementValue: value,
+			value:	this.getTransformer().format(value)
+		}, this.props.onChange(value, this.props.path));
+	}
+
+	getPlaceholder() {
+		const attrs = this.props.options.attrs || {};
+		let placeholder = attrs.placeholder
+		if (t.Nil.is(placeholder) && this.getAuto() === 'placeholders') {
+			placeholder = this.getDefaultLabel()
+		}
+		return placeholder
+	}
+
+	render(){
+		let {hasError} = this.state;
+		Element = this.getInjectedElement();
 
 		let classes = classNames({
-			field: true,
-			error: !this.state.isValid
+			'form-group':	true,
+			'has-error': 	hasError
 		});
+
+		let label = this.getLabel();
 
 		return <div className={classes}>
 			{label}{Element}
@@ -136,22 +148,26 @@ export default class Injector extends React.Component {
 }
 
 Injector.defaultProps = {
-	value: null
+	value:	null
 }
 
 Injector.propTypes = {
-	value: React.PropTypes.any,
-	inject: React.PropTypes.shape({
-		component:	React.PropTypes.object.isRequired,
-		props:		React.PropTypes.object,
-		event:		React.PropTypes.string,
-		callback:	React.PropTypes.func,
-		valueProp:	React.PropTypes.string
-	})
+	value: React.PropTypes.any
 }
 
-//FIXME: REMOVE OLD FOR OLD VERSION
+//FIXME: REMOVE THIS, IS A OLD VERSION
 Injector.InjectorFactory = function(props){
-	console.warn('TFormFactoryInjector.InjectorFactory is deprecated, please use direct import instance, see documentation');
+	console.warn('tcomb-form-injector.InjectorFactory is deprecated, please use direct import instance, see documentation');
 	return React.createElement(Injector, props);
 };
+
+
+function parseNumber(value){
+	const n = parseFloat(value)
+	const isNumeric = (value - n + 1) >= 0
+	return isNumeric ? n : toNull(value)
+}
+
+function toNull(value) {
+	return (t.String.is(value) && value.trim() === '') || Nil.is(value) ? null : value
+}

@@ -8,86 +8,72 @@ import _					from 'underscore';
 import t					from 'tcomb-form'
 
 let ctx;
-export default class Repeated extends React.Component {
+export default class Repeated extends t.form.Component {
 	constructor(props){
 		super(props);
+		const value = this.getTransformer().format(props.value)
 
 		this.state = {
-			isValid:		true,
-			value:			props.value,
-			valueRepeated:	null
-		}
+			value:			value,
+			repeatedValue:	null
+		};
 	}
 
-	//update component
-	componentWillReceiveProps(nextProps){
-		this.setState({value: nextProps.value});
+	componentWillReceiveProps(props){
+		const value = this.getTransformer().format(props.value)
+		this.setState({
+			value:			value,
+			repeatedValue:	null
+		})
 	}
 
-	onChange(value, path){
-		switch (path) {
-			case 'repeated':
-				this.setState({valueRepeated: value});
-				break;
-			default:
-				this.setState({value: value})
-		}
+	componentWillMount(props){
+		ctx = this;
+	}
+
+	onChangeRep(value){
+		value = this.getTransformer().format(value)
+		this.setState({
+			repeatedValue: value
+		})
 	}
 
 	validate(){
-		let {value, valueRepeated} = this.state;
-		let result = t.validate(value, this.props.type, this.props.ctx.path);
-		let isValid = result.isValid();
+		let {value, repeatedValue} = this.state;
+		let result = t.validate(this.getValue(), this.props.type, this.getValidationOptions())
 
-		if(isValid){
-			if(value !== valueRepeated){
-				result = t.validate(undefined, this.props.type, 'repeated')
-				isValid = false;
+		let hasError = !result.isValid();
+
+		if(!hasError){
+			if(value !== repeatedValue){
+				result = t.validate(undefined, this.props.type, this.getValidationOptions())
+				hasError = true;
 			}
 		}
 
-		this.setState({
-			isValid: isValid
-		})
+		this.setState({ hasError: hasError })
 
 		return result;
 	}
 
-	getLabel() {
-		var opts = this.props.options || {};
-	    var ctx = this.props.ctx;
-
-		// handling label
-	    var label = opts.label;
-	    if (!label && ctx.auto === 'labels') {
-	      // if labels are auto generated, get the default label
-	      label = this.getDefaultLabel();
-	    }
-
-	    if(label === undefined){
-	    	return null;
-	    }
-
-	    return (<label id={opts.id}>{label}</label>);
-	}
-
 	renderInputs(){
-		ctx = this;
-		let {value, valueRepeated, isValid} = this.state;
+		let {value, repeatedValue, hasError} = this.state;
 
-		let attrs = _.extend(this.props.options.attrs, {
+		let attrs = _.extend(this.props.options.attrs || {}, {
 			ref: 'input',
 			type: this.props.options.type,
+			value: value,
 			onChange: function(evt){
 				ctx.onChange(evt.target.value);
 			}
 		});
 
-		let repeatedAttrs = _.extend(this.props.options.repeatedAttrs, {
-			ref: 'inputRepeated',
-			type: this.props.options.type,
-			onChange: function(evt){
-				ctx.onChange(evt.target.value, 'repeated');
+		let repeatedAttrs = _.extend(this.props.options.repeatedAttrs || {}, {
+			ref:		'inputRepeated',
+			type:		this.props.options.type,
+			value:		repeatedValue,
+			onChange:	function(evt){
+				ctx.onChangeRep(evt.target.value);
 			}
 		});
 
@@ -96,8 +82,8 @@ export default class Repeated extends React.Component {
 		let inputRepeated = React.createElement('input', repeatedAttrs);
 
 		let classes = classNames({
-			field: true,
-			error: !isValid
+			'form-group':	true,
+			'has-error': 	hasError
 		});
 
 		return(
@@ -108,9 +94,9 @@ export default class Repeated extends React.Component {
 
 	render(){
 		let inputs = this.renderInputs();
-
-		return <div className="field.repeated">
-			{inputs}
-		</div>;
+		let label = this.getLabel();
+		return <div className="form:group.repeated">
+			{label}{inputs}
+		</div>
 	}
 }
