@@ -7,8 +7,8 @@ Validation extended from tcomb-form and tcomb-form-validation
 
 Contributions are welcome...
 
-**New 0.1.1**
-Deprecated indirect import
+**New 0.2.0**
+Now support tcomb-form v0.9.3 or latest
 
 [see UPGRADE.md](UPGRADE.md)
 
@@ -51,8 +51,8 @@ var formOptions = {
             inject: {
                 attrs:        {placeholder: 'Reservación'}, //tcomb attrs
                 component:    DateTime,
-                valueProp: 'defaultValue',
-                props: {        //component props
+                valueProp:	 'defaultValue',
+                props: {      //component props
                     className: 'customClassname'
                 },
                 event: 'onBlur', callback: function(locals, date){
@@ -68,6 +68,7 @@ var formOptions = {
 ###Default settings for injector
 ```js
 inject: {
+	component:		 null,			//react component 'select, range or libraries'
     valueProp:       'value',
     props:           {},            //component props
     event:           'onChange',    //component event type

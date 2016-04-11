@@ -1,6 +1,9 @@
 #tcomb-form-injector
 
-##UPGRADE LIST
+###UPGRADE LIST
+
+**0.2.0**
+Now support tcomb-form v0.9.3 or latest
 
 **0.1.2**
 Fix error class
@@ -34,5 +37,4 @@ var formnewOptions = {
 ```
 
 **New 0.1.0**
-
 Repeated field factory
