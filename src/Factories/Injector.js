@@ -77,25 +77,33 @@ export default class Injector extends t.form.Component {
 
 	getInjectedElement(){
 		let {component, props, event, callback, valueProp} = this.props.options.inject;
+		let {value, elementValue} = this.state;
 
+		props.key = Math.floor((Math.random() * 100) + 1);
 		props.placeholder = this.getPlaceholder();
 		props = _.extend(this.props.options.attrs || {}, props);
 
 		valueProp = valueProp || 'value';
-		props[valueProp] = this.state.elementValue;
+		props[valueProp] = elementValue;
 
-		//props.key = Math.floor((Math.random() * 100) + 1);
 
 		if(callback !== undefined){
 			props[event] = callback.bind(null, this);
 		}else{
-			props[event] = function(evt){
-				ctx.onChange(evt.target.value);
-			}
+			props[event] = (function(evt){
+				this.onChange(evt.target.value);
+			}).bind(this)
 		}
 
 		return React.createElement(component, props);
 	}
+
+	onChange = (value) => {
+		this.setState({
+			elementValue: value,
+			value:	this.getTransformer().format(value)
+		}, this.props.onChange(value, this.props.path));
+	};
 
 	getTransformer(){
 		const options = this.props.options;
@@ -112,13 +120,6 @@ export default class Injector extends t.form.Component {
 		}
 
 		return this.constructor.transformer;
-	}
-
-	onChange(value){
-		this.setState({
-			elementValue: value,
-			value:	this.getTransformer().format(value)
-		}, this.props.onChange(value, this.props.path));
 	}
 
 	getPlaceholder() {
