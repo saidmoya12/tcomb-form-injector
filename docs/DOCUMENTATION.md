@@ -4,6 +4,9 @@
 npm install tcomb-form-injector --save
 
 ###Example for repeated field
+
+Note: Use Factories.Repeated instance of Factories.repeated (no lowercase) sorry for confusion
+
 ```js
 import t from 'tcomb-form'
 import {Factories}        from 'tcomb-form-injector'

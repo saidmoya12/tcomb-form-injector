@@ -7,8 +7,9 @@ Validation extended from tcomb-form and tcomb-form-validation
 
 Contributions are welcome...
 
-**New 0.2.1**
-Use Repeated instance of repeated (lowercase) sorry
+
+**New 0.2.0**
+Now support tcomb-form v0.9.3 or latest
 
 [see UPGRADE.md](docs/UPGRADE.md)
 
