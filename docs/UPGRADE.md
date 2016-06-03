@@ -24,12 +24,12 @@ var formOldOptions = {
 ```
 Employ direct import instance
 ```js
-import injectorFactory from 'tcomb-form-injector'
+import InjectorFactory from 'tcomb-form-injector'
 ...
 var formnewOptions = {
 	fields: {
 		date: {
-			factory: injectorFactory,
+			factory: InjectorFactory,
 			...
 		}
 	}
