@@ -17,13 +17,13 @@ npm install tcomb-form-injector --save
 
 ###Example for repeated field
 ```js
-import t from 'tcomb-form'        
-import {Factories}        from from 'tcomb-form-injector'
+import t from 'tcomb-form'
+import {Factories}        from 'tcomb-form-injector'
 
 var formOptions = {
 	fields: {
 		password: {
-			factory:		Factories.repeated,
+			factory:		Factories.Repeated,
 			type:			'password',
 			attrs: 			{placeholder: 'Type Password'},
 			repeatedAttrs:	{placeholder: 'Repeat password'}
@@ -42,14 +42,14 @@ import t from 'tcomb-form'
 
 //sample with datetime picker
 import DateTime    			from 'react-datetime';
-import injectorFactory      from from 'tcomb-form-injector'
+import InjectorFactory      from 'tcomb-form-injector';
 
 var formOptions = {
     fields:{
         date: {
-            factory: injectorFactory,
+            factory: InjectorFactory,
             inject: {
-                attrs:        {placeholder: 'Reservación'}, //tcomb attrs
+                attrs:        {placeholder: 'Reservation date'}, //tcomb attrs
                 component:    DateTime,
                 valueProp:	 'defaultValue',
                 props: {      //component props
