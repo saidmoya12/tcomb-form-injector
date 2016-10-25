@@ -5,7 +5,7 @@ npm install tcomb-form-injector --save
 
 ###Example for repeated field
 
-Note: Use Factories.Repeated instance of Factories.repeated (no lowercase) sorry for confusion
+Note: Automatic validation for both fields
 
 ```js
 import t from 'tcomb-form'
@@ -18,12 +18,37 @@ var formOptions = {
 		password: {
 			factory:		Factories.Repeated,
 			type:			'password',
-			attrs: 			{placeholder: 'Type Password'},
+			attrs:			{placeholder: 'Type Password'},
 			repeatedAttrs:	{placeholder: 'Repeat password'}
 		}
 	}
 }
 ```
+
+###Example simple component
+
+```js
+import InjectorFactory      from 'tcomb-form-injector';
+...
+
+var formOptions = {
+    fields:{
+        slider: {
+			factory: InjectorFactory,
+            inject: {
+                component:		'input',
+                props: {    	//component props
+                    type:		'range'
+                },
+                event: 'onBlur', callback: function(locals, ev){
+                    locals.onChange(ev.target.value); //Update component value
+                }
+            }
+		}
+    }
+}
+```
+
 ###Example complex component
 
 Aditional info:
@@ -50,9 +75,8 @@ var formOptions = {
                 props: {      //component props
                     className: 'customClassname'
                 },
-                event: 'onBlur', callback: function(locals, date){
-                    //update value
-                    locals.onChange(date.format('YYYY-MM-DD HH:mm:ss'));
+                callback: function(locals, event){
+                    locals.onChange(event.target.value);//update component value
                 }
             }
         }
