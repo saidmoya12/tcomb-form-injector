@@ -37,7 +37,7 @@ var formOptions = {
 			factory: InjectorFactory,
             inject: {
                 component:		'input',
-                props: {    	//component props
+                props: {
                     type:		'range'
                 },
                 event: 'onBlur', callback: function(locals, ev){
@@ -63,7 +63,6 @@ import DateTime    			from 'react-datetime';
 import InjectorFactory      from 'tcomb-form-injector';
 
 ...
-
 var formOptions = {
     fields:{
         date: {
