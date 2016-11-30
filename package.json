@@ -1,6 +1,6 @@
 {
   "name": "tcomb-form-injector",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Inject any component as tcomb-form field",
   "main": "lib/index.js",
   "scripts": {
@@ -30,10 +30,10 @@
     "url": "https://github.com/saidmoya12/tcomb-form-injector/issues"
   },
   "homepage": "https://github.com/saidmoya12/tcomb-form-injector#readme",
-  "dependencies": {
+  "peerDependencies": {
     "classnames": ">=2.0.0",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0",
+    "react": ">=0.14.0 || ^15.0.0",
+    "react-dom": ">=0.14.0 || ^15.0.0",
     "tcomb": "^3.0.0",
     "tcomb-form": "^0.9.3",
     "tcomb-validation": "^3.0.0",
