@@ -24,6 +24,21 @@ export default class Injector extends t.form.Component {
 		parse: value => value
 	};
 
+	static stringTransformer = {
+		format: value => {
+			if (t.Nil.is(value)) return '';
+
+			if(value instanceof Object){
+				if(value.name !== undefined){
+					value = value.name;
+				}
+			}
+
+			return value
+		},
+		parse: value => value
+	};
+
 	static numberTransformer = {
 		format: value => {
 			if(t.Nil.is(value)) return '';
@@ -44,8 +59,9 @@ export default class Injector extends t.form.Component {
 
 	constructor(props){
 		if(props.options.inject === undefined || props.options.inject.component === undefined){
-			throw new Error('inject params are required');
+			throw new Error('inject.component prop is required');
 		}
+
 		props.options.inject = Object.assign({
 			props: {},
 			'event': 'onChange',
@@ -54,7 +70,7 @@ export default class Injector extends t.form.Component {
 		super(props);
 
 		this.state = Object.assign(this.state, {
-			elementValue:	props.value
+			elementValue:	this.getTransformer().format(props.value)//props.value
 		});
 	}
 
@@ -78,23 +94,24 @@ export default class Injector extends t.form.Component {
 		let {component, props, event, callback, valueProp} = this.props.options.inject;
 		let {value, elementValue} = this.state;
 
-		props.key = Math.floor((Math.random() * 100) + 1);
+		props.key = props.key || (this.props.key || this.props.name);
 		props.placeholder = this.getPlaceholder();
 		props = Object.assign(this.props.options.attrs || {}, props);
 
 		valueProp = valueProp || 'value';
 		props[valueProp] = elementValue;
 
-
 		if(callback !== undefined){
 			props[event] = callback.bind(null, this);
 		}else{
-			props[event] = (function(evt){
-				this.onChange(evt.target.value);
-			}).bind(this)
+			props[event] = this._nativeChange.bind(this);
 		}
 
 		return React.createElement(component, props);
+	}
+
+	_nativeChange = (event) => {
+		this.onChange(event.target.value)
 	}
 
 	onChange = (value) => {
@@ -115,7 +132,8 @@ export default class Injector extends t.form.Component {
 		switch (type) {
 			case t.Number.meta.name:
 				return this.constructor.numberTransformer;
-			break;
+			case t.String.meta.name:
+				return this.constructor.stringTransformer;
 		}
 
 		return this.constructor.transformer;
@@ -152,7 +170,7 @@ Injector.defaultProps = {
 }
 
 Injector.propTypes = {
-	value: React.PropTypes.any
+	value: 	React.PropTypes.any
 }
 
 //FIXME: REMOVE THIS, IS A OLD VERSION

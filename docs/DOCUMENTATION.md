@@ -1,7 +1,9 @@
 #tcomb-form-injector
 
 ###Instalation
+```
 npm install tcomb-form-injector --save
+```
 
 ###Example for repeated field
 
@@ -86,7 +88,7 @@ var formOptions = {
 ###Default settings for injector
 ```js
 inject: {
-	component:		 null,			//react component 'select, range or libraries'
+	component:		 undefined,		//REQUIRED! react component 'select, range or libraries'
     valueProp:       'value',
     props:           {},            //component props
     event:           'onChange',    //component event type
