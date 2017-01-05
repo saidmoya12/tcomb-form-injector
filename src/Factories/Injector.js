@@ -4,8 +4,7 @@
 'use strict';
 import React				from 'react';
 import classNames			from 'classnames';
-import _					from 'underscore';
-import t					from 'tcomb-form'
+import t					from 'tcomb-form';
 
 let ctx;
 export default class Injector extends t.form.Component {
@@ -13,7 +12,7 @@ export default class Injector extends t.form.Component {
 		format: value => {
 			if(t.Nil.is(value)) return false;
 
-			if(_.isObject(value)){
+			if(value instanceof Object){
 				if(value.id !== undefined){
 					value = value.id;
 				}else if(value.key !== undefined){
@@ -29,7 +28,7 @@ export default class Injector extends t.form.Component {
 		format: value => {
 			if(t.Nil.is(value)) return '';
 
-			if(_.isObject(value)){
+			if(value instanceof Object){
 				if(value.id !== undefined){
 					value = value.id;
 				}else if(value.key !== undefined){
@@ -47,14 +46,14 @@ export default class Injector extends t.form.Component {
 		if(props.options.inject === undefined || props.options.inject.component === undefined){
 			throw new Error('inject params are required');
 		}
-		props.options.inject = _.extend({
+		props.options.inject = Object.assign({
 			props: {},
 			'event': 'onChange',
 			onChange: function(){}
 		}, props.options.inject);
 		super(props);
 
-		this.state = _.extend(this.state, {
+		this.state = Object.assign(this.state, {
 			elementValue:	props.value
 		});
 	}
@@ -81,7 +80,7 @@ export default class Injector extends t.form.Component {
 
 		props.key = Math.floor((Math.random() * 100) + 1);
 		props.placeholder = this.getPlaceholder();
-		props = _.extend(this.props.options.attrs || {}, props);
+		props = Object.assign(this.props.options.attrs || {}, props);
 
 		valueProp = valueProp || 'value';
 		props[valueProp] = elementValue;

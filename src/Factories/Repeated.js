@@ -4,7 +4,6 @@
 'use strict';
 import React				from 'react';
 import classNames			from 'classnames';
-import _					from 'underscore';
 import t					from 'tcomb-form'
 
 let ctx;
@@ -59,7 +58,7 @@ export default class Repeated extends t.form.Component {
 	renderInputs(){
 		let {value, repeatedValue, hasError} = this.state;
 
-		let attrs = _.extend(this.props.options.attrs || {}, {
+		let attrs = Object.assign(this.props.options.attrs || {}, {
 			ref: 'input',
 			type: this.props.options.type,
 			value: value,
@@ -68,7 +67,7 @@ export default class Repeated extends t.form.Component {
 			}
 		});
 
-		let repeatedAttrs = _.extend(this.props.options.repeatedAttrs || {}, {
+		let repeatedAttrs = Object.assign(this.props.options.repeatedAttrs || {}, {
 			ref:		'inputRepeated',
 			type:		this.props.options.type,
 			value:		repeatedValue,
