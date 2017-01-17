@@ -2,6 +2,15 @@
 
 ###UPGRADE LIST
 
+**0.3.0** 
+Last upgrades for compatibility with
+tcomb-form 0.9.10
+React 15.4 (Null for string fileds isn't still support in react)
+
+Fix issues
+- Fixed Issue #2 IE 10 Unable to get property 'hasError' of undefined or null reference
+- Test with consistent key (Pending for check) Issue #3
+
 **0.2.0**
 Now support tcomb-form v0.9.3 or latest
 

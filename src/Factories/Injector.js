@@ -93,8 +93,9 @@ export default class Injector extends t.form.Component {
 	getInjectedElement(){
 		let {component, props, event, callback, valueProp} = this.props.options.inject;
 		let {value, elementValue} = this.state;
+		props.key = props.key || this.props.name;
 
-		props.key = props.key || (this.props.key || this.props.name);
+
 		props.placeholder = this.getPlaceholder();
 		props = Object.assign(this.props.options.attrs || {}, props);
 
