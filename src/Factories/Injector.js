@@ -10,7 +10,7 @@ let ctx;
 export default class Injector extends t.form.Component {
 	static transformer = {
 		format: value => {
-			if(t.Nil.is(value)) return;
+			if(t.Nil.is(value)) return null;
 
 			if(value instanceof Object){
 				if(value.id !== undefined){
@@ -41,7 +41,7 @@ export default class Injector extends t.form.Component {
 
 	static numberTransformer = {
 		format: value => {
-			if(t.Nil.is(value)) return;
+			if(t.Nil.is(value)) return '';
 
 			if(value instanceof Object){
 				if(value.id !== undefined){
