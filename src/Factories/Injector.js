@@ -5,6 +5,7 @@
 import React				from 'react';
 import classNames			from 'classnames';
 import t					from 'tcomb-form';
+import {getTypeInfo}		from 'tcomb-form/lib/util'
 
 let ctx;
 export default class Injector extends t.form.Component {
@@ -65,8 +66,8 @@ export default class Injector extends t.form.Component {
 		props.options.inject = Object.assign({
 			props: {},
 			'event': 'onChange',
-			onChange: function(){}
 		}, props.options.inject);
+
 		super(props);
 
 		this.state = Object.assign(this.state, {
@@ -78,6 +79,11 @@ export default class Injector extends t.form.Component {
 		if (props.type !== this.props.type) {
 	    	this.typeInfo = getTypeInfo(props.type)
 	    }
+		props.options.inject = Object.assign({
+			props: {},
+			'event': 'onChange',
+		}, props.options.inject);
+
 	    const value = this.getTransformer().format(props.value)
 
 		this.setState({
@@ -93,11 +99,12 @@ export default class Injector extends t.form.Component {
 	getInjectedElement(){
 		let {component, props, event, callback, valueProp} = this.props.options.inject;
 		let {value, elementValue} = this.state;
-		props.key = props.key || this.props.name;
 
+		props.key = props.key || this.props.ctx.name;
 
-		props.placeholder = this.getPlaceholder();
-		props = Object.assign(this.props.options.attrs || {}, props);
+		props = Object.assign({
+			placeholder: this.getPlaceholder()
+		}, this.props.options.attrs || {}, props);
 
 		valueProp = valueProp || 'value';
 		props[valueProp] = elementValue;
@@ -167,7 +174,7 @@ export default class Injector extends t.form.Component {
 }
 
 Injector.defaultProps = {
-	value:	null
+	value:	''
 }
 
 Injector.propTypes = {
