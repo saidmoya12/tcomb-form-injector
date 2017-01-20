@@ -147,6 +147,7 @@ export default class Injector extends t.form.Component {
 		return this.constructor.transformer;
 	}
 
+	//@override
 	getPlaceholder() {
 		const attrs = this.props.options.attrs || {};
 		let placeholder = attrs.placeholder
@@ -156,21 +157,28 @@ export default class Injector extends t.form.Component {
 		return placeholder
 	}
 
+	//@override
+	getLabel(){
+		let label = super.getLabel();
+		if(label !== undefined) return <label>{label}</label>
+	}
+
 	render(){
 		let {hasError} = this.state;
 		let name = this.props.ctx.name;
 
 		Element = this.getInjectedElement();
 
-		let classes = classNames({
-			'form-group':		true,
-			'form-group-'+name:	true,
-			'has-error': 		hasError
-		});
+		let classes = {
+			'form-group':			true,
+			'form-group-depth-1':	true,
+			'has-error': 			hasError
+		};
+		classes['form-group-'+name] = true;
 
 		let label = this.getLabel();
 
-		return <div className={classes}>
+		return <div className={classNames(classes)}>
 			{label}{Element}
 		</div>;
 	}
