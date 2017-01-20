@@ -158,11 +158,14 @@ export default class Injector extends t.form.Component {
 
 	render(){
 		let {hasError} = this.state;
+		let name = this.props.ctx.name;
+
 		Element = this.getInjectedElement();
 
 		let classes = classNames({
-			'form-group':	true,
-			'has-error': 	hasError
+			'form-group':		true,
+			'form-group-'+name:	true,
+			'has-error': 		hasError
 		});
 
 		let label = this.getLabel();
