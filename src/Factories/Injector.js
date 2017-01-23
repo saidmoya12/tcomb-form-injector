@@ -126,7 +126,7 @@ export default class Injector extends t.form.Component {
 		this.setState({
 			elementValue: value,
 			value:	this.getTransformer().format(value)
-		}, this.props.onChange(value, this.props.path));
+		}, this.props.onChange(value, this.props.ctx.path));
 	};
 
 	getTransformer(){
