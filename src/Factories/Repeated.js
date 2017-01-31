@@ -6,35 +6,10 @@ import React				from 'react';
 import classNames			from 'classnames';
 import t					from 'tcomb-form'
 
-let ctx;
-export default class Repeated extends t.form.Component {
+export default class Repeated extends t.form.Textbox {
 	constructor(props){
 		super(props);
-		const value = this.getTransformer().format(props.value)
-
-		this.state = {
-			value:			value,
-			repeatedValue:	null
-		};
-	}
-
-	componentWillReceiveProps(props){
-		const value = this.getTransformer().format(props.value)
-		this.setState({
-			value:			value,
-			repeatedValue:	null
-		})
-	}
-
-	componentWillMount(props){
-		ctx = this;
-	}
-
-	onChangeRep(value){
-		value = this.getTransformer().format(value)
-		this.setState({
-			repeatedValue: value
-		})
+		this.state.repeatedValue = '';
 	}
 
 	validate(){
@@ -51,13 +26,22 @@ export default class Repeated extends t.form.Component {
 		}
 
 		this.setState({ hasError: hasError })
-
 		return result;
 	}
 
-	renderInputs(){
+
+
+	_onChangeRep(value){
+		value = this.getTransformer().format(value)
+		this.setState({
+			repeatedValue: value
+		})
+	}
+
+	_renderInputs(){
 		let {value, repeatedValue, hasError} = this.state;
 
+		let ctx = this;
 		let attrs = Object.assign(this.props.options.attrs || {}, {
 			ref: 'input',
 			type: this.props.options.type,
@@ -72,7 +56,7 @@ export default class Repeated extends t.form.Component {
 			type:		this.props.options.type,
 			value:		repeatedValue,
 			onChange:	function(evt){
-				ctx.onChangeRep(evt.target.value);
+				ctx._onChangeRep(evt.target.value);
 			}
 		});
 
@@ -81,8 +65,9 @@ export default class Repeated extends t.form.Component {
 		let inputRepeated = React.createElement('input', repeatedAttrs);
 
 		let classes = classNames({
-			'form-group':	true,
-			'has-error': 	hasError
+			'form-group':			true,
+			'form-group-depth-1':	true,
+			'has-error': 			hasError
 		});
 
 		return(
@@ -92,10 +77,17 @@ export default class Repeated extends t.form.Component {
 	}
 
 	render(){
-		let inputs = this.renderInputs();
-		let label = this.getLabel();
-		return <div className="form:group.repeated">
-			{label}{inputs}
+		let inputs = this._renderInputs();
+		let name = this.props.ctx.name;
+
+		let classes = {
+			'form-group-repeated':	true
+		};
+		classes['form-group-'+name] = true;
+
+
+		return <div className={classNames(classes)}>
+			{inputs}
 		</div>
 	}
 }
