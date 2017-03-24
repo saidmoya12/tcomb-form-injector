@@ -12,6 +12,18 @@ export default class Repeated extends t.form.Textbox {
 		this.state.repeatedValue = '';
 	}
 
+	shouldComponentUpdate(nextProps, nextState){
+		const should = (
+			nextState.value !== this.state.value ||
+			nextState.repeatedValue !== this.state.repeatedValue ||
+			nextState.hasError !== this.state.hasError ||
+			nextProps.options !== this.props.options ||
+			nextProps.type !== this.props.type
+		)
+
+		return should;
+	}
+
 	validate(){
 		let {value, repeatedValue} = this.state;
 		let result = t.validate(this.getValue(), this.props.type, this.getValidationOptions())
@@ -41,13 +53,12 @@ export default class Repeated extends t.form.Textbox {
 	_renderInputs(){
 		let {value, repeatedValue, hasError} = this.state;
 
-		let ctx = this;
 		let attrs = Object.assign(this.props.options.attrs || {}, {
 			ref: 'input',
 			type: this.props.options.type,
 			value: value,
-			onChange: function(evt){
-				ctx.onChange(evt.target.value);
+			onChange: (evt) => {
+				this.onChange(evt.target.value);
 			}
 		});
 
@@ -55,8 +66,8 @@ export default class Repeated extends t.form.Textbox {
 			ref:		'inputRepeated',
 			type:		this.props.options.type,
 			value:		repeatedValue,
-			onChange:	function(evt){
-				ctx._onChangeRep(evt.target.value);
+			onChange:	(evt) => {
+				this._onChangeRep(evt.target.value);
 			}
 		});
 
@@ -84,7 +95,6 @@ export default class Repeated extends t.form.Textbox {
 			'form-group-repeated':	true
 		};
 		classes['form-group-'+name] = true;
-
 
 		return <div className={classNames(classes)}>
 			{inputs}

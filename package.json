@@ -1,6 +1,6 @@
 {
   "name": "tcomb-form-injector",
-  "version": "0.3.2",
+  "version": "0.3.21",
   "description": "Inject any component as tcomb-form field",
   "main": "lib/index.js",
   "scripts": {
@@ -27,21 +27,21 @@
   "homepage": "https://github.com/saidmoya12/tcomb-form-injector#readme",
   "peerDependencies": {
     "classnames": ">=2.2.5",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
+    "react": "^0.14.0 || ^15.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0",
     "tcomb": "^3.2.16",
     "tcomb-form": "^0.9.10",
     "tcomb-validation": "^3.3.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.21.0",
-    "babel-plugin-transform-class-properties": "^6.19.0",
-    "babel-plugin-transform-es2015-classes": "^6.18.0",
-    "babel-plugin-transform-es2015-object-super": "^6.8.0",
-    "babel-plugin-transform-object-assign": "^6.8.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0"
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-es2015-classes": "^6.23.0",
+    "babel-plugin-transform-es2015-object-super": "^6.22.0",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0"
   }
 }
