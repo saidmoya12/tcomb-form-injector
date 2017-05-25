@@ -3,6 +3,7 @@
 */
 'use strict';
 import React				from 'react';
+import PropTypes			from 'prop-types';
 import classNames			from 'classnames';
 import t					from 'tcomb-form'
 
@@ -100,4 +101,8 @@ export default class Repeated extends t.form.Textbox {
 			{inputs}
 		</div>
 	}
+}
+
+Repeated.propTypes = {
+	repeatedValue: PropTypes.any
 }

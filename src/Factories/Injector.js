@@ -3,6 +3,7 @@
 */
 'use strict';
 import React				from 'react';
+import PropTypes			from 'prop-types';
 import classNames			from 'classnames';
 import t					from 'tcomb-form';
 import {getTypeInfo}		from 'tcomb-form/lib/util'
@@ -101,6 +102,7 @@ export default class Injector extends t.form.Component {
 		let {value, elementValue} = this.state;
 
 		props.key = props.key || this.props.ctx.name;
+		props.ref = 'component';
 
 		props = Object.assign({
 			placeholder: this.getPlaceholder()
@@ -189,7 +191,7 @@ Injector.defaultProps = {
 }
 
 Injector.propTypes = {
-	value: 	React.PropTypes.any
+	value: 	PropTypes.any
 }
 
 //FIXME: REMOVE THIS, IS A OLD VERSION
@@ -197,7 +199,6 @@ Injector.InjectorFactory = function(props){
 	console.warn('tcomb-form-injector.InjectorFactory is deprecated, please use direct import instance, see documentation');
 	return React.createElement(Injector, props);
 };
-
 
 function parseNumber(value){
 	const n = parseFloat(value)
