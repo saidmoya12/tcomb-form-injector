@@ -1,8 +1,18 @@
 #tcomb-form-injector
 
 ###UPGRADE LIST
+**0.3.3**
+- include PropTypes instance of React.PropTypes
+- Now you can access to ref injected coponent
+```js
+//injected some datepicker
+onChange((locals, value)=>{
+	let MyInjectedComponent = locals.refs.component;
+	...
+})
+```
 
-**0.3.0** 
+**0.3.0**
 Last upgrades for compatibility with
 tcomb-form 0.9.10
 React 15.4 (Null for string fileds isn't still support in react)
