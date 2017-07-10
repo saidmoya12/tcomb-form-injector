@@ -72,7 +72,7 @@ export default class Injector extends t.form.Component {
 		super(props);
 
 		this.state = Object.assign(this.state, {
-			elementValue:	this.getTransformer().format(props.value)//props.value
+			value:	this.getTransformer().format(props.value)//props.value
 		});
 	}
 
@@ -85,11 +85,8 @@ export default class Injector extends t.form.Component {
 			'event': 'onChange',
 		}, props.options.inject);
 
-	    const value = this.getTransformer().format(props.value)
-
 		this.setState({
-			value:			value,
-			elementValue:	props.value
+			value:			this.getTransformer().format(props.value),
 		})
 	}
 
@@ -99,7 +96,7 @@ export default class Injector extends t.form.Component {
 
 	getInjectedElement(){
 		let {component, props, event, callback, valueProp} = this.props.options.inject;
-		let {value, elementValue} = this.state;
+		let {value} = this.state;
 
 		props.key = props.key || this.props.ctx.name;
 		props.ref = 'component';
@@ -109,25 +106,30 @@ export default class Injector extends t.form.Component {
 		}, this.props.options.attrs || {}, props);
 
 		valueProp = valueProp || 'value';
-		props[valueProp] = elementValue;
+		props[valueProp] = value;
 
 		if(callback !== undefined){
 			props[event] = callback.bind(null, this);
 		}else{
-			props[event] = this._nativeChange.bind(this);
+			props[event] = this._defChange.bind(this);
 		}
 
 		return React.createElement(component, props);
 	}
 
-	_nativeChange = (event) => {
-		this.onChange(event.target.value)
+	_defChange = (event) => { //default callback
+		if(event.target !== undefined){
+			this.onChange(event.target.value); return;
+		}
+
+		this.onChange(event);
 	}
 
 	onChange = (value) => {
 		this.setState({
-			elementValue: value,
-			value:	this.getTransformer().format(value)
+			value: value
+			//elementValue: value,
+			//value:	this.getTransformer().format(value)
 		}, this.props.onChange(value, this.props.ctx.path));
 	};
 

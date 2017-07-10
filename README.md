@@ -1,27 +1,28 @@
-#tcomb-form-injector
+# tcomb-form-injector
 
-###About
+### About
 
 Inject any component as tcomb-form field, (autocomplete, datetime, custom, etc)
 Validation extended from tcomb-form and tcomb-form-validation
 
+
 Contributions are welcome...
 
-**0.3.0** 
-Last upgrades for compatibility with
-tcomb-form 0.9.10
-React 15.4 (Null for string fileds isn't still support in react)
+
+**0.3.4**
+
+* Allow JSON DB value default transformer like {id:1, name: "tom"} or {key: 5, text: "something"}
+- Improvement default callback compatibility with many components by default for code reduction
 
 Fix issues
-- Fixed Issue #2 IE 10 Unable to get property 'hasError' of undefined or null reference
-- Test with consistent key (Pending for check) Issue #3
+- tcomb-form custom transformer
 
 
 [see UPGRADE.md](docs/UPGRADE.md)
 
-###Instalation
+### Instalation
 ```
 npm install tcomb-form-injector --save
 ```
 
-[see full documentation](docs/DOCUMENTATION.md)
+[See full documentation](docs/Documentation3_x.md)

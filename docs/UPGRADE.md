@@ -1,9 +1,20 @@
-#tcomb-form-injector
+## tcomb-form-injector
 
-###UPGRADE LIST
+#### UPGRADE LIST
+
+**0.3.4**
+
+* Allow JSON DB value default transformer like {id:1, name: "tom"} or {key: 5, text: "something"}
+- Improvement default callback compatibility with many components by default (reduce code...)
+
+Fix issues
+- tcomb-form custom transformer
+
+
 **0.3.3**
 - include PropTypes instance of React.PropTypes
 - Now you can access to ref injected coponent
+
 ```js
 //injected some datepicker
 onChange((locals, value)=>{
@@ -14,8 +25,7 @@ onChange((locals, value)=>{
 
 **0.3.0**
 Last upgrades for compatibility with
-tcomb-form 0.9.10
-React 15.4 (Null for string fileds isn't still support in react)
+tcomb-form 0.9.10 and React 15.4 or later
 
 Fix issues
 - Fixed Issue #2 IE 10 Unable to get property 'hasError' of undefined or null reference

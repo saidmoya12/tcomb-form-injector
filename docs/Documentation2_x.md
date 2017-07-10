@@ -1,15 +1,12 @@
-#tcomb-form-injector
+## tcomb-form-injector
 
-###Instalation
-```
+#### Instalation
+
 npm install tcomb-form-injector --save
-```
-
-###Example for repeated field
+#### Example for repeated field
 
 Note: Automatic validation for both fields
 
-```js
 import t from 'tcomb-form'
 import {Factories}        from 'tcomb-form-injector'
 
@@ -25,11 +22,8 @@ var formOptions = {
 		}
 	}
 }
-```
+#### Example simple component
 
-###Example simple component
-
-```js
 import InjectorFactory      from 'tcomb-form-injector';
 ...
 
@@ -49,15 +43,10 @@ var formOptions = {
 		}
     }
 }
-```
+#### Example complex component
 
-###Example complex component
+Aditional info: tcomb-form react-datetime
 
-Aditional info:
-[tcomb-form](https://github.com/gcanti/tcomb-form)
-[react-datetime](https://github.com/gcanti/tcomb-form)
-
-```js
 import t from 'tcomb-form'        
 
 //sample with datetime picker
@@ -83,10 +72,8 @@ var formOptions = {
         }
     }
 }
-```
+#### Default settings for injector
 
-###Default settings for injector
-```js
 inject: {
 	component:		 undefined,		//REQUIRED! react component 'select, range or libraries'
     valueProp:       'value',
@@ -96,4 +83,3 @@ inject: {
         locals.onChange(value);
     }
 }
-```
