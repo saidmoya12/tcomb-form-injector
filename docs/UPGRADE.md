@@ -18,8 +18,8 @@ Fix issues
 ```js
 //injected some datepicker
 onChange((locals, value)=>{
-	let MyInjectedComponent = locals.refs.component;
-	...
+    let MyInjectedComponent = locals.refs.component;
+    ...
 })
 ```
 
@@ -43,12 +43,12 @@ Deprecated indirect import
 import TFormFactoryInjector from 'tcomb-form-injector'
 ...
 var formOldOptions = {
-	fields: {
-		date: {
-			factory: TFormFactoryInjector.injectorFactory,
-			...
-		}
-	}
+    fields: {
+        date: {
+            factory: TFormFactoryInjector.injectorFactory,
+            ...
+        }
+    }
 }
 ```
 Employ direct import instance
@@ -56,12 +56,12 @@ Employ direct import instance
 import InjectorFactory from 'tcomb-form-injector'
 ...
 var formnewOptions = {
-	fields: {
-		date: {
-			factory: InjectorFactory,
-			...
-		}
-	}
+    fields: {
+        date: {
+            factory: InjectorFactory,
+            ...
+        }
+    }
 }
 ```
 

@@ -13,14 +13,14 @@ import {Factories}        from 'tcomb-form-injector'
 ...
 
 var formOptions = {
-	fields: {
-		password: {
-			factory:		Factories.Repeated,
-			type:			'password',
-			attrs:			{placeholder: 'Type Password'},
-			repeatedAttrs:	{placeholder: 'Repeat password'}
-		}
-	}
+    fields: {
+        password: {
+            factory:         Factories.Repeated,
+            type:            'password',
+            attrs:           {placeholder: 'Type Password'},
+            repeatedAttrs:   {placeholder: 'Repeat password'}
+        }
+    }
 }
 #### Example simple component
 
@@ -30,17 +30,17 @@ import InjectorFactory      from 'tcomb-form-injector';
 var formOptions = {
     fields:{
         slider: {
-			factory: InjectorFactory,
+            factory: InjectorFactory,
             inject: {
-                component:		'input',
+                component:        'input',
                 props: {
-                    type:		'range'
+                    type:        'range'
                 },
                 event: 'onBlur', callback: function(locals, ev){
                     locals.onChange(ev.target.value); //Update component value
                 }
             }
-		}
+        }
     }
 }
 #### Example complex component
@@ -50,7 +50,7 @@ Aditional info: tcomb-form react-datetime
 import t from 'tcomb-form'        
 
 //sample with datetime picker
-import DateTime    			from 'react-datetime';
+import DateTime                from 'react-datetime';
 import InjectorFactory      from 'tcomb-form-injector';
 
 ...
@@ -61,7 +61,7 @@ var formOptions = {
             inject: {
                 attrs:        {placeholder: 'Reservation date'}, //tcomb attrs
                 component:    DateTime,
-                valueProp:	 'defaultValue',
+                valueProp:     'defaultValue',
                 props: {      //component props
                     className: 'customClassname'
                 },
@@ -75,7 +75,7 @@ var formOptions = {
 #### Default settings for injector
 
 inject: {
-	component:		 undefined,		//REQUIRED! react component 'select, range or libraries'
+    component:         undefined,        //REQUIRED! react component 'select, range or libraries'
     valueProp:       'value',
     props:           {},            //component props
     event:           'onChange',    //component event type

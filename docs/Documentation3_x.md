@@ -11,37 +11,37 @@ Inject any component as tcomb-form field, (autocomplete, datetime, custom, etc) 
 npm install tcomb-form-injector --save
 ```
 
-[See 2.x documentation](docs/documentation2_x.md)
+[See 2.x documentation](documentation2_x.md)
 
 
 #### Basic Usage example
 
 ```js
-import t 					from 'tcomb-form'        
-import InjectorFactory		from 'tcomb-form-injector';
-import DateTime    			from 'react-datetime';
-import moment				from 'moment';
+import t                     from 'tcomb-form'        
+import InjectorFactory       from 'tcomb-form-injector';
+import DateTime              from 'react-datetime';
+import moment                from 'moment';
 ...
 
 var formType = t.struct({
-	born: t.String
+    born: t.String
 })
 
 var formOptions = {
-	fields: {
-		//inject datetime
-		born: {
-			label: 'Born date: ',
-			factory: InjectorFactory,
+    fields: {
+        //inject datetime
+        born: {
+            label: 'Born date: ',
+            factory: InjectorFactory,
             inject: {
                 component:   DateTime
             },
-			transformer: { //string to date
-				format: (value) => moment(value),
-				parse: (value) => value.format('YYYY-MM-DD')
-			}
-		}
-	}
+            transformer: { //string to date
+                format: (value) => moment(value),
+                parse: (value) => value.format('YYYY-MM-DD')
+            }
+        }
+    }
 }
 
 //render...
@@ -54,7 +54,7 @@ Aditional info:
 * [moment.js](https://momentjs.com/docs/)
 
 ---
-##### [See more examples...](docs/Examples.md)
+##### [See more examples...](Examples.md)
 ---
 
 #### Settings - injector
